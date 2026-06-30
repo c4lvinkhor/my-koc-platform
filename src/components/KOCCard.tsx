@@ -67,11 +67,11 @@ export default function KOCCard({ koc, index, onSelect, onViewProfile }: KOCCard
 
         <div className="grid grid-cols-2 gap-4 mt-5 pt-4 border-t border-[var(--color-border)]">
           <div>
-            <p className="text-xs text-[var(--color-text-muted)]">{koc.followers >= 1000000 ? formatNumber(koc.followers) : `${formatNumber(koc.followers)}`}</p>
+            <p className="text-xs text-[var(--color-text-secondary)]">{koc.followers >= 1000000 ? formatNumber(koc.followers) : `${formatNumber(koc.followers)}`}</p>
             <p className="text-xs text-[var(--color-text-muted)] mt-0.5">Followers</p>
           </div>
           <div>
-            <p className="text-xs text-[var(--color-text-muted)]">{koc.engagement}%</p>
+            <p className="text-xs text-[var(--color-text-secondary)]">{koc.engagement}%</p>
             <p className="text-xs text-[var(--color-text-muted)] mt-0.5">Engagement</p>
           </div>
         </div>

@@ -29,7 +29,7 @@ export default function Hero({ t, onExplore }: HeroProps) {
           {t('hero_title')}
         </h1>
 
-        <p className="opacity-0 animate-fade-in-up text-lg md:text-xl text-[var(--color-text-secondary)] max-w-2xl mx-auto leading-relaxed mb-12" style={{ animationDelay: '0.6s' }}>
+        <p className="opacity-0 animate-fade-in-up text-lg md:text-xl text-[var(--color-text-primary)] max-w-2xl mx-auto leading-relaxed mb-12" style={{ animationDelay: '0.6s' }}>
           {t('hero_subtitle')}
         </p>
 

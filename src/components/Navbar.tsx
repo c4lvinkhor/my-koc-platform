@@ -27,7 +27,7 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
         <a href="#" className="flex items-center gap-3 group">
           <div className="w-10 h-10 rounded-lg bg-[var(--color-accent)] flex items-center justify-center group-hover:scale-105 transition-transform">
-            <span className="font-display text-xl text-white font-bold">P</span>
+            <span className="font-display text-xl text-white font-bold">M</span>
           </div>
           <div className="hidden sm:block">
             <p className="font-display text-lg text-[var(--color-text-primary)] tracking-tight leading-none">MY KOC</p>
