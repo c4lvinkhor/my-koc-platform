@@ -88,7 +88,6 @@ export default function Pricing({ onSelectPlan, currentPlan }: PricingProps) {
                     {isCurrent ? 'Current Plan' : 'Select Plan'}
                   </button>
                 </div>
-              </div>
             );
           })}
         </div>

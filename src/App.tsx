@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { useLanguage } from './hooks/useLanguage';
-import { useUserStore } from './stores/userStore';
+import { useUser } from './context/UserContext';
 import { kocs, negeriList, negeriToDaerahs, platforms, audiences } from './data/kocs';
 import type { KOC } from './data/kocs';
 import KOCSkeleton from './components/KOCSkeleton';
@@ -25,7 +25,7 @@ const ITEMS_PER_PAGE = 12;
 
 export default function App() {
   const { lang, setLang, t } = useLanguage();
-  const userStore = useUserStore();
+  const userStore = useUser();
   const [filters, setFilters] = useState<Filters>({
     negeri: [],
     daerah: [],
@@ -44,19 +44,15 @@ export default function App() {
   const [currentView, setCurrentView] = useState<'landing' | 'login' | 'business-profile' | 'dashboard' | 'admin'>('landing');
   const [isAuthLoading, setIsAuthLoading] = useState(true);
 
-  // Initialize user store with localStorage data
-  useEffect(() => {
-    userStore.loadFromStorage();
-  }, []);
-
-  // Simplified auth: just load from localStorage, no Firebase dependency
+  // Single localStorage auth source
   useEffect(() => {
     const stored = localStorage.getItem('perak-koc-user');
     if (stored) {
       try {
         const userData = JSON.parse(stored);
         userStore.setUser(userData);
-        setCurrentView('business-profile');
+        const profile = localStorage.getItem('perak-koc-business-profile');
+        setCurrentView(profile ? 'dashboard' : 'business-profile');
       } catch {
         localStorage.removeItem('perak-koc-user');
       }
@@ -381,7 +377,15 @@ export default function App() {
   }
 
   if (currentView === 'dashboard') {
-    return <BusinessDashboard profile={userStore.businessProfile} onSignOut={userStore.logout} />;
+    return (
+      <BusinessDashboard
+        profile={userStore.businessProfile}
+        onSignOut={() => {
+          userStore.logout();
+          setCurrentView('landing');
+        }}
+      />
+    );
   }
 
   if (currentView === 'admin') {
