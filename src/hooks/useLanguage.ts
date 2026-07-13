@@ -10,3 +10,5 @@ export function useLanguage() {
 
   return { lang, setLang, t };
 }
+
+export { type Lang } from '../data/i18n';

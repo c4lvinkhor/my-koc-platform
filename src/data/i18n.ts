@@ -9,8 +9,17 @@ export const i18n: Record<Lang, Record<string, string>> = {
     nav_cta: 'Mula Sekarang',
     nav_subtitle: 'Platform Pengiklanan',
 
+    // Login
+    login_business_access: 'Akses untuk Perniagaan',
+
     // Filter (extra)
     filter_all_areas: 'Semua Kawasan',
+
+    // Favorites
+    nav_favorites: 'Kegemaran',
+    favorites_empty: 'Tiada KOC kegemaran',
+    favorites_clear: 'Kosongkan semua',
+    favorites_count: '{count} KOC kegemaran',
 
     // KOC Detail Modal
     detail_followers: 'Penjangkauan Audiens',
@@ -102,10 +111,19 @@ export const i18n: Record<Lang, Record<string, string>> = {
     nav_cta: 'Get Started',
     nav_subtitle: 'Advertising Platform',
 
+    // Login
+    login_business_access: 'Business Access',
+
     // Filter (extra)
     filter_all_areas: 'All Areas',
 
-    // KOC Detail Modal
+    // Favorites
+    nav_favorites: 'Favorites',
+    favorites_empty: 'No favorite KOCs',
+    favorites_clear: 'Clear all',
+    favorites_count: '{count} favorite KOCs',
+
+    // HeroKOC Detail Modal
     detail_followers: 'Audience Reach',
     detail_demographics: 'Demographics',
     detail_past_brands: 'Past Brands',
@@ -198,7 +216,13 @@ export const i18n: Record<Lang, Record<string, string>> = {
     // Filter (extra)
     filter_all_areas: '所有区域',
 
-    // KOC Detail Modal
+    // Favorites
+    nav_favorites: '收藏',
+    favorites_empty: '暂无收藏的KOC',
+    favorites_clear: '清空收藏',
+    favorites_count: '{count} 个收藏',
+
+    // HeroKOC Detail Modal
     detail_followers: '受众覆盖',
     detail_demographics: '受众统计',
     detail_past_brands: '曾合作品牌',

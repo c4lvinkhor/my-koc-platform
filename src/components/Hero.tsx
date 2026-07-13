@@ -1,9 +1,10 @@
 interface HeroProps {
   t: (key: string) => string;
   onExplore: () => void;
+  onShowFavorites: () => void;
 }
 
-export default function Hero({ t, onExplore }: HeroProps) {
+export default function Hero({ t, onExplore, onShowFavorites }: HeroProps) {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       <div className="absolute inset-0">
@@ -39,6 +40,12 @@ export default function Hero({ t, onExplore }: HeroProps) {
             className="px-8 py-4 rounded-full bg-[var(--color-accent)] text-white font-semibold text-base hover:bg-[var(--color-accent-hover)] transition-all duration-300 shadow-lg shadow-[var(--color-accent)]/20"
           >
             {t('hero_cta')}
+          </button>
+          <button
+            onClick={onShowFavorites}
+            className="px-8 py-4 rounded-full bg-[var(--color-surface-raised)] border border-[var(--color-border)] text-[var(--color-text-primary)] font-semibold text-base hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-white transition-all duration-300"
+          >
+            {t('nav_favorites')}
           </button>
           <a
             href="#services"

@@ -1,5 +1,6 @@
 import { useLanguage } from '../hooks/useLanguage';
 import { formatNumber } from '../utils/format';
+import FavoriteButton from './FavoriteButton';
 import type { KOC } from '../data/kocs';
 
 interface KOCCardProps {

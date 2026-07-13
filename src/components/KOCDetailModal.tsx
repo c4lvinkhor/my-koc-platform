@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import { formatNumber } from '../utils/format';
 import type { KOC } from '../data/kocs';
@@ -259,13 +259,7 @@ export default function KOCDetailModal({ koc, onClose, onGeneratePitch, t }: KOC
               </h3>
               <div className="grid grid-cols-3 gap-3">
                 {portfolio.map((src, i) => (
-                  <img
-                    key={i}
-                    src={src}
-                    alt={`Portfolio ${i + 1}`}
-                    className="aspect-video object-cover rounded-xl border border-[var(--color-border)]"
-                    loading="lazy"
-                  />
+                  <PortfolioImage key={i} src={src} alt={`Portfolio ${i + 1}`} />
                 ))}
               </div>
             </section>
@@ -281,6 +275,103 @@ export default function KOCDetailModal({ koc, onClose, onGeneratePitch, t }: KOC
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+interface PortfolioImageProps {
+  src: string;
+  alt: string;
+}
+
+function PortfolioImage({ src, alt }: PortfolioImageProps) {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const imgElement = document.querySelector(`img[alt="${alt}"]`) as HTMLImageElement;
+    if (imgElement) {
+      observer.observe(imgElement);
+    }
+
+    return () => observer.disconnect();
+  }, [alt]);
+
+  const handleLoad = () => {
+    setIsLoaded(true);
+  };
+
+  const handleError = () => {
+    setHasError(true);
+  };
+
+  const placeholderColors = [
+    'bg-[#f8e8d0]',
+    'bg-[#e8d4b8]',
+    'bg-[#d8c0a0]',
+    'bg-[#c8ac88]',
+    'bg-[#b89870]',
+    'bg-[#a88458]',
+  ];
+
+  const colorIndex = alt.charCodeAt(alt.length - 1) % placeholderColors.length;
+
+  if (hasError) {
+    return (
+      <div className="aspect-video rounded-xl bg-[var(--color-surface-overlay)] border border-[var(--color-border)] flex items-center justify-center">
+        <div className="text-[var(--color-text-muted)] text-xs text-center p-4">
+          <div className="w-6 h-6 mx-auto mb-2 bg-[var(--color-surface-raised)] rounded" />
+          Image not available
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="aspect-video rounded-xl border border-[var(--color-border)] overflow-hidden relative">
+      {!isInView && !isLoaded && (
+        <div className="w-full h-full bg-[var(--color-surface-overlay)] animate-pulse">
+          <div className="w-full h-full flex items-center justify-center">
+            <div
+              className={`w-16 h-16 rounded-lg ${placeholderColors[colorIndex]}`}
+            />
+          </div>
+        </div>
+      )}
+
+      {isInView && (
+        <>
+          <img
+            src={src}
+            alt={alt}
+            className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${
+              isLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
+            onLoad={handleLoad}
+            onError={handleError}
+          />
+          {!isLoaded && (
+            <div className="absolute inset-0 bg-[var(--color-surface-overlay)] animate-pulse">
+              <div className="w-full h-full flex items-center justify-center">
+                <div
+                  className={`w-16 h-16 rounded-lg ${placeholderColors[colorIndex]}`}
+                />
+              </div>
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 }

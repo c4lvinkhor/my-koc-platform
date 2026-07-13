@@ -39,6 +39,9 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
           <a href="#kocs" className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors">
             {t('nav_kocs')}
           </a>
+          <a href="#favorites" className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors">
+            {t('nav_favorites')}
+          </a>
           <a href="#services" className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors">
             {t('nav_services')}
           </a>
