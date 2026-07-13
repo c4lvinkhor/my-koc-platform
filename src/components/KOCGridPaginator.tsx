@@ -87,7 +87,7 @@ export default function KOCGridPaginator({ totalPages, page, filteredKocsCount, 
       </button>
       
       <div className="ml-4 text-sm text-[var(--color-text-muted)]">
-        {t('filter_page_of', { page, totalPages })}
+        {t('filter_page_of')}: {page} / {totalPages}
       </div>
     </div>
   );
